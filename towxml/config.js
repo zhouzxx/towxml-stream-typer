@@ -3,7 +3,7 @@ module.exports = {
 
     // 数学公式解析API
     latex:{
-        api:'http://towxml.vvadd.com/?tex'
+        api:'http://47.119.142.242:8001/?tex'
     },
 
     // yuml图解析APPI
