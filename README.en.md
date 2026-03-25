@@ -61,8 +61,8 @@ Download the `wxcomponents` folder and place it in your Mini Program or uniapp p
 
 I have prepared two ready-to-use chat examples:
 
-[uniapp Example](https://github.com/zhouzxx/towxml-stream-typer-uniapp-example)
-[Native WeChat Mini Program Example](https://github.com/zhouzxx/towxml-stream-typer-weChat-example)
+[uniapp Example](https://github.com/zhouzxx/towxml-stream-typewriter-uniapp-example)
+[Native WeChat Mini Program Example](https://github.com/zhouzxx/towxml-stream-typewriter-weChat-example)
 
 ***Highly recommended: Use one of these demos as a reference.
 
