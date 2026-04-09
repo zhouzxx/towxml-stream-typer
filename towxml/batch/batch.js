@@ -17,7 +17,7 @@ Component({
     },
     towxmlId: {
       type: String,
-      value: 0,
+      value: "",
     },
   },
   lifetimes: {
@@ -30,8 +30,8 @@ Component({
         node,
         cb
       ) => {
-        _this.data.batchNodes[index] = node;
         if (index == undefined) {
+          _this.data.batchNodes = node;
           _this.setData({
             batchNodes: node,
           }, () => {
@@ -53,6 +53,7 @@ Component({
             }
           });
         } else {
+          _this.data.batchNodes[index] = node;
           _this.setData({
             [`batchNodes[${index}]`]: node,
           });
@@ -99,8 +100,6 @@ Component({
           return;
         }
         _this.data.isShow = true;
-        const tmpDataNodes = _this.data.batchNodes;
-        // _this.data.batchNodes = [];
         _this.setData(
           {
             batchNodes: _this.data.batchNodes,

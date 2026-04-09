@@ -103,10 +103,7 @@ Component({
     },
 
     handleImageClick: function (e) {
-      const FILE_PATH = "https://www.szzxjy.com.cn/";
-      const OSS_PATH = "https://zxx-wwj-oss.oss-cn-shenzhen.aliyuncs.com/";
-      //将cdn地址替换为oss地址，因为cdn地址在预览的时候一直转圈，加载不出来，oss地址可以，暂时不知道原因
-      const currentImage = e.currentTarget.dataset.src.replace(FILE_PATH, OSS_PATH);
+      const currentImage = e.currentTarget.dataset.src;
       console.log("currentImage的值：", currentImage)
       wx.previewImage({
         current: currentImage, // 当前显示图片的http链接

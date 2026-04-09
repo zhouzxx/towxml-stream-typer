@@ -11,7 +11,7 @@ const towxmlIdStore = {
   value: [],
 }; //记录了所有towxml实例的id
 const openTyperScore = { value: {} };
-const screenNum = 10;
+const screenNum = 4;
 const screenHeight = {
   value: undefined,
 };
@@ -80,18 +80,21 @@ const scrollCb = throttle(async (e) => {
   if (!setQueryTowxmlNodeFn.value) {
     return;
   }
+  if (typeof screenHeight.value !== "number" || !isFinite(screenHeight.value) || screenHeight.value <= 0) {
+    return;
+  }
+  scrollRenderTimes.value = scrollRenderTimes.value + 1;
+  const curScrollRenderTimes = scrollRenderTimes.value;
   setQueryTowxmlNodeFn.value(async (towxmlNodes) => {
     if (towxmlNodes && Array.isArray(towxmlNodes) && towxmlNodes.length > 0) {
       towxmlNodes.sort((a, b) => {
         return a.top - b.top;
       });
-      scrollRenderTimes.value = scrollRenderTimes.value + 1;
-      const curScrollRenderTimes = scrollRenderTimes.value;
       const upIndex = [];
       const downIndex = [];
       const hideIndex = [];
-      const uplimt = screenNum * screenHeight.value * -1;
-      const downlimt = screenNum * screenHeight.value;
+      const uplimit = screenNum * screenHeight.value * -1;
+      const downlimit = screenNum * screenHeight.value;
       for (let node of towxmlNodes) {
         const towxmlId = node.dataset.towxmlid;
         if (!batchHeight.value[towxmlId]) {
@@ -104,7 +107,7 @@ const scrollCb = throttle(async (e) => {
         for (let i of batchIds) {
           totalHeight = totalHeight + batchHeight.value[towxmlId][i];
         }
-        if (node.top > downlimt || node.top + totalHeight < uplimt) {
+        if (node.top > downlimit || node.top + totalHeight < uplimit) {
           for (let m of batchIds) {
             hideIndex.push({
               towxmlId,
@@ -118,9 +121,9 @@ const scrollCb = throttle(async (e) => {
             const curBatchUp = node.top + curTotalHeight;
             const curBatchDown = node.top + curTotalHeight + curBatchHeight;
             if (
-              (curBatchUp >= uplimt && curBatchUp <= downlimt) ||
-              (curBatchDown >= uplimt && curBatchDown <= downlimt) ||
-              (curBatchUp <= uplimt && curBatchDown >= downlimt)
+              (curBatchUp >= uplimit && curBatchUp <= downlimit) ||
+              (curBatchDown >= uplimit && curBatchDown <= downlimit) ||
+              (curBatchUp <= uplimit && curBatchDown >= downlimit)
             ) {
               if (curBatchUp < 0) {
                 upIndex.push({
@@ -158,7 +161,7 @@ const scrollCb = throttle(async (e) => {
 
       // console.log("scrollDirection的值:",scrollDirection)
       //显示
-      //屏幕往下滑
+      //scrollTop 变小
       if (scrollDirection == 1) {
         if (upIndex.length > 0) {
           for (let m = upIndex.length - 1; m >= 0; m--) {
@@ -189,7 +192,7 @@ const scrollCb = throttle(async (e) => {
           }
         }
       }
-      //屏幕往上滑
+      //scrollTop 变大
       else if (scrollDirection == 0) {
         if (downIndex.length > 0) {
           for (let n = 0; n < downIndex.length; n++) {

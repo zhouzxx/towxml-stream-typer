@@ -3,7 +3,7 @@ module.exports = {
 
     // 数学公式解析API
     latex:{
-        api:'http://47.119.142.242:8001/?tex'
+        api:'http://towxml.vvadd.com/?tex'
     },
 
     // yuml图解析APPI
@@ -17,8 +17,8 @@ module.exports = {
         'sup',                      // 上标支持
         'ins',                      // 文本删除线支持
         'mark',                     // 文本高亮支持
-        'emoji',                    // emoji表情支持
-        'todo'                      // todo支持
+        // 'emoji',                    // emoji表情支持
+        // 'todo'                      // todo支持
     ],
 
     // 代码高亮配置，保留需要的选项即可（尽量越少越好，不要随意调整顺序。部分高亮有顺序依赖）
@@ -253,12 +253,12 @@ module.exports = {
 
     // 自定义组件
     components:[
-        'audio-player',             // 音频组件，建议保留，由于小程序原生audio存在诸多问题，towxml解决了原生音频播放器的相关问题
-        'echarts',                  // echarts图表支持
-        'latex',                    // 数学公式支持
+        // 'audio-player',             // 音频组件，建议保留，由于小程序原生audio存在诸多问题，towxml解决了原生音频播放器的相关问题
+        // 'echarts',                  // echarts图表支持
+        // 'latex',                    // 数学公式支持
         'table',                    // 表格支持
-        'todogroup',                // todo支持
-        'yuml',                     // yuml图表支持
+        // 'todogroup',                // todo支持
+        // 'yuml',                     // yuml图表支持
         'img'                       // 图片解析组件
     ],
 

@@ -122,7 +122,6 @@ Component({
       destroyTextData(this.data.towxmlId);
       destroyBatchData(this.data.towxmlId);
       destroyTowxmlData(this.data.towxmlId);
-      towxmlIdStore.value.push(this.data.towxmlId);
       if (this.data.typerTimer) {
         this.data.typerTimer.cancel()
       }
@@ -134,7 +133,6 @@ Component({
     batchIds: [0],
     batchSize: 20,
     startShowBatch: false,
-    screenNum: 10, //这个参数是指滚动时加载上下多少屏的数据，比如这里设置的8，就是加载当前屏幕中线位置上面8屏和下面8屏的数据
     typerTimer: undefined
   },
   methods: {
@@ -155,7 +153,7 @@ Component({
         //强制终止
         if (stopStore.value[_this.data.towxmlId] == true) {
           this.triggerEvent("finish", {
-            message: "打字完毕！",
+            message: "打字已停止",
           });
           console.log("结束打字时间：", new Date());
           _this.data.typerTimer.cancel();
@@ -168,6 +166,11 @@ Component({
           ] == undefined
         ) {
           // console.log(`空转一下，等待batch组件实例${_this.data.batchIds[_this.data.batchIds.length - 1]}创建好`)
+          return;
+        }
+        if (
+          !mdTextStore.value[_this.data.towxmlId]
+        ) {
           return;
         }
         if (
@@ -217,10 +220,7 @@ Component({
           // clearInterval(typerTimer)
           return;
         }
-        if (
-          !mdTextStore.value[_this.data.towxmlId] ||
-          c >= mdTextStore.value[_this.data.towxmlId].length
-        ) {
+        if (c >= mdTextStore.value[_this.data.towxmlId].length) {
           return;
         }
         const singleChar = mdTextStore.value[_this.data.towxmlId][c];
@@ -477,7 +477,7 @@ Component({
                   curText.value[_this.data.towxmlId] === allText[c - 2] &&
                   lastCurText !== curText.value[_this.data.towxmlId]
                 ) {
-                  textRenderCb[_this.data.towxmlId].value(singleChar);
+                  textRenderCb.value[_this.data.towxmlId](singleChar);
                   return;
                 }
                 //还有一种情况,不做处理：没有产生新的文本实例，一段连续显示的文本中碰到了特殊markdown字符，但是特殊字符不是正常显示，最后那个正常字符确不正常显示，如：

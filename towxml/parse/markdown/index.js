@@ -1,3 +1,4 @@
+//@towxml-remove-start no-highlight
 let hljs;
 hljs = require('../highlight/index');
 
@@ -48,6 +49,7 @@ function replaceSpacesInText(html) {
 
     return result;
 }
+//@towxml-remove-end no-highlight
 
 const config = require('../../config'),
     mdOption = (() => {
@@ -58,6 +60,7 @@ const config = require('../../config'),
             breaks: true,
         };
 
+        //@towxml-remove-start no-highlight
         if (config.highlight.length && hljs) {
             result.highlight = (code, lang, callback) => {
                 let lineLen = code.split(/\r|\n/ig).length,
@@ -94,16 +97,19 @@ const config = require('../../config'),
                 return result;
             }
         };
+        //@towxml-remove-end no-highlight
         return result;
     })(),
     md = require('./markdown')(mdOption);
 
 // 应用Markdown解析扩展，包括自定义组件（['sub','sup','ins','mark','emoji','todo','latex','yuml','echarts']）
+//@towxml-remove-start dynamic-markdown-plugins
 [...config.markdown,...config.components].forEach(item => {
     if(!/^audio-player|table|todogroup|img$/.test(item)){
         md.use(require(`./plugins/${item}`));
     };
 });
+//@towxml-remove-end dynamic-markdown-plugins
 //@regMarkdownPlugins
 
 // 定义emoji渲染规则

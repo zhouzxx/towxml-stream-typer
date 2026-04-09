@@ -1,5 +1,5 @@
 <view style="min-height:{{hasSetHeight?height+'px':''}}" id="batch{{batchId}}" class="towxml-batch">
-  <view wx-if="{{isShow}}">
+  <view wx:if="{{isShow}}">
     <block wx:for="{{batchNodes}}" wx:for-index="i" wx:for-item="item" wx:key="i">
       <block wx:if="{{item.tag===undefined}}">
         <typable-text text="{{item.text}}" towxmlId="{{item.towxmlId}}" />
@@ -34,7 +34,7 @@
       </block>
       <block wx:if="{{item.tag==='image'}}">
         <view class="h2w__imageParent">
-          <image data-data="{{item}}" class="{{item.attrs.class}}" data="{{item.attrs.data}}" id="{{item.attrs.id}}" style="{{item.attrs.style}}" catch:tap="_tap" src="{{item.attrs.src}}" mode="{{item.attrs.mode ? item.attrs.mode : 'widthFix'}}" lazy-load="{{item.attr['lazy-load']}}">
+          <image data-data="{{item}}" class="{{item.attrs.class}}" data="{{item.attrs.data}}" id="{{item.attrs.id}}" style="{{item.attrs.style}}" catch:tap="_tap" src="{{item.attrs.src}}" mode="{{item.attrs.mode ? item.attrs.mode : 'widthFix'}}" lazy-load="{{item.attrs['lazy-load']}}">
             <decode wx:if="{{item.children}}" nodes="{{item}}" />
           </image>
         </view>
