@@ -99,4 +99,4 @@ npm run build 打包后使用，支持微信开发者工具的代码保护
 > 具体怎么操作，参考 [uniapp使用示例](https://github.com/zhouzxx/towxml-stream-typer-uniapp-example) 或者 [原生微信小程序使用示例](https://github.com/zhouzxx/towxml-stream-typer-weChat-example) 使用示例，其实很简单的
 
 
-##### 5.后续代码更新了，你就把这个towxml文件夹下载下来，替换你项目中的towmxl文件夹就行了。当然如果添加了某些新功能，也可能会在demo中写一些代码配合调用。
+##### 5.后续代码更新了，你就把这个towxml文件夹下载下来，打包，然后替换你项目中的towmxl文件夹就行了。当然如果添加了某些新功能，也可能会在demo中写一些代码配合调用。
