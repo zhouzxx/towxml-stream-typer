@@ -1,0 +1,12 @@
+<view class="h2w h2w-{{theme}} towmxl-instance" data-id="{{towxmlId}}" id="towxml-{{towxmlId}}">
+  <view class="h2w__main" wx:if="{{openTyper}}">
+    <block wx:if="{{startShowBatch}}">
+      <block wx:for="{{batchIds}}" wx:for-index="i" wx:for-item="item" wx:key="i">
+        <batch batchId="{{item}}" towxmlId="{{towxmlId}}" />
+      </block>
+    </block>
+  </view>
+  <view class="h2w__main" wx:else>
+    <batch wx:if="{{startShowBatch}}" batchId="{{0}}" towxmlId="{{towxmlId}}" />
+  </view>
+</view>

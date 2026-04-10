@@ -1,0 +1,1 @@
+var DomHandler=require("./domhandler/index.js"),Parser=require("./Parser.js");function parseDocument(e,r){var n=new DomHandler(void 0,r);return new Parser(n,r).end(e),n.root.children}module.exports=parseDocument;

@@ -1,7 +1,3 @@
-//@towxml-remove-start no-highlight
-let hljs;
-hljs = require('../highlight/index');
-//@towxml-remove-end no-highlight
 
 function replaceSpacesInText(html) {
     let result = '';
@@ -66,12 +62,7 @@ const config = require('../../config'),
             let lineLen = code.split(/\r|\n/ig).length
             let result = code;
 
-            //@towxml-remove-start no-highlight
-            if (config.highlight.length && hljs) {
-                result = hljs.highlightAuto(code).value;
-            }
-            //@towxml-remove-end no-highlight
-
+            
             // 代码块多换行的问题
             result = result.replace(/(\r|\n){2,}/g, str => {
                 return new Array(str.length).join("<p>&nbsp;</p>")
@@ -108,14 +99,7 @@ const config = require('../../config'),
     md = require('./markdown')(mdOption);
 
 // 应用Markdown解析扩展，包括自定义组件（['sub','sup','ins','mark','emoji','todo','latex','yuml','echarts']）
-//@towxml-remove-start dynamic-markdown-plugins
-[...config.markdown, ...config.components].forEach(item => {
-    if (!/^audio-player|table|todogroup|img$/.test(item)) {
-        md.use(require(`./plugins/${item}`));
-    };
-});
-//@towxml-remove-end dynamic-markdown-plugins
-//@regMarkdownPlugins
+md.use(require('./plugins/sub'));md.use(require('./plugins/sup'));md.use(require('./plugins/ins'));md.use(require('./plugins/mark'));
 
 // 定义emoji渲染规则
 md.renderer.rules.emoji = (token, index) => {
